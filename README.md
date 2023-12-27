@@ -11,6 +11,11 @@ Todas las operaciones realizadas deben acreditarse con una prueba de funcionamie
 [Alumno 4](Alumno4/Alumno4.md)
 
 
+[Grupal 1](Grupal1/Grupal1.md)
+
+[Grupal 2](Grupal2/Grupal2.md)
+
+[Grupal 3](Grupal3/Grupal3.md)
 
 
 
