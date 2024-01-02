@@ -2,7 +2,64 @@
 
 ## Postgres:
 
-Averigua que privilegios de sistema hay en Postgres y como se asignan a un usuario.
+## 1. Averigua que privilegios de sistema hay en Postgres y como se asignan a un usuario.
+
+La verdad que PostgreSQL funciona un poco diferente a Oracle, ya que los  privilegios y permisos se administran utilizando roles. Estos roles son básicamente grupos de usuarios que comparten los mismos privilegios y permisos en la base de datos, algo parecido a los "privilegios de los grupos" como tal, pero haciendo incapié que evidente no es lo mismo, pero sirve un poco para poder comprenderlo de mejor manera.
+
+| Privilegio   | Descripción                                               |
+|--------------|-----------------------------------------------------------|
+| SELECT       | Permite al usuario recuperar datos de una tabla o vista.   |
+| INSERT       | Permite al usuario agregar nuevos registros a una tabla.   |
+| UPDATE       | Permite al usuario modificar los registros existentes.     |
+| DELETE       | Permite al usuario eliminar registros de una tabla.        |
+| TRUNCATE     | Permite al usuario truncar una tabla, es decir, eliminar todos los registros. |
+| REFERENCES   | Permite al usuario crear una clave foránea que haga referencia a otra tabla. |
+| TRIGGER      | Permite al usuario crear y ejecutar disparadores (triggers).|
+| CREATE       | Permite al usuario crear nuevos objetos en la base de datos, como tablas, vistas, índices, etc. |
+| CONNECT      | Permite al usuario conectarse a una base de datos específica. |
+| TEMPORARY    | Permite al usuario crear tablas temporales.                 |
+| EXECUTE      | Permite al usuario ejecutar una función.                    |
+| USAGE        | Permite al usuario utilizar un esquema, secuencia o función. |
+
+
+### Roles:
+
+Los roles se asignan por ejemplo tanto a usuarios como también a grupos de usuarios, aunque también pueden ser asignados a otros roles, permitiendo la creación de jerarquías y estructuras más complejas. La asignación de roles puede realizarse en diferentes niveles, como bases de datos, esquemas y tablas. Por ejemplo, como vimos en clase si tenemos varios roles A B y C, C puede contener también sus privilegios y también los de A o B.
+
+### Roles a Objetos de Bases de Datos:
+
+Además de asignar roles a usuarios, se pueden asignar a objetos específicos de la base de datos, como vistas, secuencias y funciones. También es posible asignar roles a otros objetos de la base de datos, como índices y secuencias.
+
+Por ejemplo la asignación de permisos a un rol puede llevarse a cabo de dos maneras, durante la creación del rol mediante la instrucción CREATE ROLE rol WITH opción y por otra parte después de la creación del rol mediante la instrucción ALTER ROLE rol WITH opción.
+
+### Opciones de Roles:
+
+Algunas de las opciones de uso para los roles son:
+
+- SUPERUSER/NOSUPERUSER: Para otorgar privilegios de super usuario.
+- ADMIN: Establece qué rol o roles tienen el derecho de agregar otros roles.
+- CREATEDB/NOCREATEDB: Para permitir o no que un usuario pueda crear nuevas bases de datos
+- REPLICATION/NOREPLICATION: Permite o niega al usuario replicar la base de datos.
+- CREATEROLE/NOCREATEROLE: Para permitir o no que un usuario pueda crear nuevos roles.
+- INHERIT/NOINHERIT: Para que un usuario herede  privilegios de los roles o no.
+- LOGIN/NOLOGIN: Para conceder o no que un usuario pueda iniciar sesión.
+- CONNECTION LIMIT: Para establecer un límite de las conexiones simultáneas.
+- VALID UNTIL: Para establecer una fecha de caducidad de un usuario.
+- PASSWORD: Para asignar contraseñas.
+- ENCRYPTED: Para establecer si la contraseña debe estar encriptada (si fuera necesario).
+- IN ROLE: Define los roles a los que pertenece el usuario.
+
+Ejemplo:
+
+Para crear un rol que de privilegios que permita crear bases de datos o crear neuvos roles:
+
+`CREATE ROLE rol WITH CREATEDB, CREATEROLE;`
+
+Para asignarme el nuevo rol:
+
+`ALTER USER andres WITH ROLE rol;`
+
+
 
 Averigua cual es la forma de asignar y revocar privilegios sobre una tabla concreta en Postgres.
 
