@@ -2,13 +2,13 @@
 
 Todas las operaciones realizadas deben acreditarse con una prueba de funcionamiento en la que quede demostrado que ha sido realizada por el alumno correspondiente.
 
-[Alumno 1](Alumno1/alumno1.md)
+[Alumno 1: Oscar](Alumno1/alumno1.md)
 
-[Alumno 2](Alumno2/Alumno2.md)
+[Alumno 2: Andres](Alumno2/Alumno2.md)
 
-[Alumno 3](Alumno3/Alumno3.md)
+[Alumno 3: Gonzalo](Alumno3/Alumno3.md)
 
-[Alumno 4](Alumno4/Alumno4.md)
+[Alumno 4: Jose Manuel](Alumno4/Alumno4.md)
 
 
 [Grupal 1](Grupal/Grupal1.md)
