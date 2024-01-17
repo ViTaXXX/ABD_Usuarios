@@ -59,6 +59,42 @@ GRANT ROLPRACTICA TO USRPRACTICA;
 
 
 5. Concede a USRPRACTICA el privilegio de crear tablas, insertar y modificar datos en el esquema de cualquier otro usuario. Prueba el privilegio. Comprueba si puede modificar la estructura o eliminar las tablas creadas.
+
+```
+GRANT CREATE ANY TABLE, INSERT ANY TABLE TO USRPRACTICA;
+```
+
+![Ejercicio 5](5.png)
+
+
+```
+Crear tablas, insertar y modificar datos.
+
+create table SCOTT.ejemplo1(
+                nombre varchar2(15),
+                apellido1 varchar2(15)
+        );
+
+INSERT INTO SCOTT.ejemplo1 VALUES ('Oscar','Sanabria');
+INSERT INTO SCOTT.ejemplo1 VALUES ('Luis','Sanabria');
+
+```
+![Ejercicio 5](55.png)
+
+
+```
+Otros privilegios
+
+ALTER TABLE SCOTT.ejemplo1 DROP COLUMN apellido1;
+
+delete from SCOTT.ejemplo1;
+```
+![Ejercicio 5](555.png)
+
+drop table SCOTT.ejemplo1;
+
+
+
 6. Concede a USRPRACTICA el privilegio de leer la tabla EMP de SCOTT con la posibilidad de que lo pase a su vez a terceros usuarios.
 7. Da a USRPRACTICA los permisos necesarios para poder crear triggers sobre sus tablas.
 8. Quita a USRPRACTICA1 el privilegio de crear vistas. Comprueba que ya no puede hacerlo.
