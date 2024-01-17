@@ -85,7 +85,26 @@ GRANT ALL PRIVILEGES ON *.* TO 'Empleado'@'localhost' WITH GRANT OPTION;
 
 2. (ORACLE, Postgres, MySQL) Escribe una consulta que obtenga un script para quitar cualquier privilegio de consulta a alguna tabla de SCOTT a los usuarios que lo tengan.
 
-#MYSQL
+# ORACLE
+```
+SELECT 'REVOKE SELECT ON SCOTT.' || table_name || ' FROM ' || grantee || ';' AS revoke_statement
+FROM DBA_TAB_PRIVS
+WHERE OWNER = 'SCOTT'
+  AND PRIVILEGE = 'SELECT';
+```
+
+![Ejercicio 22](8.png)
+
+```
+grant Select on SCOTT.EMP to oscar;
+grant Select on SCOTT.DEPT to oscar;
+```
+
+![Ejercicio 22](88.png)
+
+
+
+# MYSQL
 
 ```
 GRANT SELECT ON scott.EMP to 'Empleado'@'localhost' IDENTIFIED BY "1234" WITH GRANT OPTION;
