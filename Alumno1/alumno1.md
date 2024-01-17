@@ -2,13 +2,13 @@
 
 1.Crea un rol ROLPRACTICA con los privilegios (no roles) necesarios para conectarse a la base de datos, crear tablas y vistas e insertar datos en la tabla EMP de SCOTT.
 
-`CREATE ROLE ROLPRACTICA;
+```
+CREATE ROLE ROLPRACTICA;
 
 GRANT CONNECT, CREATE VIEW, CREATE TABLE TO ROLPRACTICA;
 
-GRANT INSERT ON SCOTT.EMP TO ROLPRACTICA;`
-
-
+GRANT INSERT ON SCOTT.EMP TO ROLPRACTICA;
+```
 
 Crea un usuario USRPRACTICA con el tablespace USERS por defecto y averigua que cuota se le ha asignado por defecto en cada tablespace. Ponle una cuota de 1M en USERS.
 
