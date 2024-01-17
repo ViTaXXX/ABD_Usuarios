@@ -10,11 +10,15 @@ GRANT CONNECT, CREATE VIEW, CREATE TABLE TO ROLPRACTICA;
 GRANT INSERT ON SCOTT.EMP TO ROLPRACTICA;
 ```
 
-Crea un usuario USRPRACTICA con el tablespace USERS por defecto y averigua que cuota se le ha asignado por defecto en cada tablespace. Ponle una cuota de 1M en USERS.
+![Ejercicio 1](1.png)
 
-Modifica el usuario USRPRACTICA para que tenga cuota 0 en el tablespace SYSTEM.
 
-Concede a USRPRACTICA el ROLPRACTICA.
+
+2.Crea un usuario USRPRACTICA con el tablespace USERS por defecto y averigua que cuota se le ha asignado por defecto en cada tablespace. Ponle una cuota de 1M en USERS.
+
+3.Modifica el usuario USRPRACTICA para que tenga cuota 0 en el tablespace SYSTEM.
+
+4.Concede a USRPRACTICA el ROLPRACTICA.
 
 Concede a USRPRACTICA el privilegio de crear tablas, insertar y modificar datos en el esquema de cualquier otro usuario. 
 
