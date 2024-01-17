@@ -16,9 +16,47 @@ GRANT INSERT ON SCOTT.EMP TO ROLPRACTICA;
 
 2.Crea un usuario USRPRACTICA con el tablespace USERS por defecto y averigua que cuota se le ha asignado por defecto en cada tablespace. Ponle una cuota de 1M en USERS.
 
+
+```
+CREATE USER USRPRACTICA IDENTIFIED BY "usuario" DEFAULT TABLESPACE USERS;
+
+SELECT USERNAME,BYTES FROM DBA_TS_QUOTAS WHERE USERNAME = 'USRPRACTICA';
+
+sqlplus  USRPRACTICA/usuario
+
+```
+![Ejercicio 2](2.png)
+
+
+```
+Cambio la cuota y verificamos.
+
+ALTER USER USRPRACTICA QUOTA 1M ON USERS;
+
+SELECT USERNAME,BYTES FROM DBA_TS_QUOTAS WHERE USERNAME = 'USRPRACTICA';
+
+```
+![Ejercicio 2](22.png)
+
+
+
+
 3.Modifica el usuario USRPRACTICA para que tenga cuota 0 en el tablespace SYSTEM.
 
+```
+ALTER USER USRPRACTICA QUOTA 0 ON SYSTEM;
+```
+![Ejercicio 3](3.png)
+
+
 4.Concede a USRPRACTICA el ROLPRACTICA.
+
+```
+GRANT ROLPRACTICA TO USRPRACTICA;
+```
+
+![Ejercicio 4](4.png)
+
 
 Concede a USRPRACTICA el privilegio de crear tablas, insertar y modificar datos en el esquema de cualquier otro usuario. 
 
