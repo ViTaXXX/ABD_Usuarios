@@ -14,7 +14,7 @@ Insertar datos en tablas ubicadas en cualquier tablespace.
 
 Gestión completa de usuarios, privilegios y roles.
 
-#MYSQL
+# MYSQL
 
 1.1 Conectarse a la base de datos.
 
