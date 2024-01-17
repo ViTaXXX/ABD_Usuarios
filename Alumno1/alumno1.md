@@ -88,10 +88,11 @@ Otros privilegios
 ALTER TABLE SCOTT.ejemplo1 DROP COLUMN apellido1;
 
 delete from SCOTT.ejemplo1;
-```
-![Ejercicio 5](555.png)
 
 drop table SCOTT.ejemplo1;
+
+```
+![Ejercicio 5](555.png)
 
 
 
