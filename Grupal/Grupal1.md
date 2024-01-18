@@ -14,6 +14,78 @@ Insertar datos en tablas ubicadas en cualquier tablespace.
 
 Gestión completa de usuarios, privilegios y roles.
 
+# ORACLE
+
+
+Conectarse a la base de datos.
+
+```
+CREATE USER Empleado IDENTIFIED BY 1234;
+```
+![Ejercicio](111.png)
+
+
+Modificar la duración máxima de las sesiones de otros usuarios.
+
+```
+GRANT CREATE SESSION TO Empleado;
+```
+![Ejercicio](1111.png)
+
+Modificar índices en cualquier esquema (este privilegio podrá pasarlo a quien quiera)
+
+```
+GRANT GRANT ANY OBJECT PRIVILEGE TO Empleado WITH ADMIN OPTION;
+GRANT ALTER ANY INDEX TO Empleado;
+```
+![Ejercicio ](11111.png)
+
+Insertar filas en scott.emp (este privilegio podrá pasarlo a quien quiera)
+
+```
+GRANT INSERT ON scott.emp TO Empleado WITH GRANT OPTION;
+```
+![Ejercicio](111111.png)
+
+
+Insertar datos en tablas ubicadas en cualquier tablespace.
+
+```
+GRANT UNLIMITED TABLESPACE TO Empleado;
+```
+![Ejercicio](1111111.png)
+
+
+Gestión completa de usuarios, privilegios y roles.
+
+```
+Gestión de usuarios:
+ 
+GRANT CREATE USER TO Empleado;
+GRANT BECOME USER TO Empleado;
+GRANT ALTER USER TO Empleado;
+GRANT DROP USER TO Empleado;
+
+Gestión de privilegios: 
+
+GRANT ALL PRIVILEGES TO Empleado;
+
+Gestión de roles:
+
+ 
+GRANT CREATE ROLE TO Empleado;
+GRANT ALTER ANY ROLE TO Empleado;
+GRANT DROP ANY ROLE TO Empleado;
+GRANT GRANT ANY ROLE TO Empleado;
+
+```
+![Ejercicio](100.png)
+![Ejercicio](110.png)
+![Ejercicio](112.png)
+
+
+
+
 # MYSQL
 
 1.1 Conectarse a la base de datos.
