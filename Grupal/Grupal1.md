@@ -99,7 +99,7 @@ CREATE USER 'Empleado'@'localhost' IDENTIFIED BY '1234';
 
 2.2 Modificar la duración máxima de las sesiones de otros usuarios.
 
-Para modificar el numero de intentos sobre una sesion para los usuarios, debemos ir a la siguiente ruta /etc/mysql/mariadb.conf.d/50-mysqld_safe.cnf y modificar el siguiente valor por el que consideramos.
+Para modificar la sesion maxima de un usuario  sobre una sesion para los usuarios, debemos ir a la siguiente ruta /etc/mysql/mariadb.conf.d/50-mysqld_safe.cnf y modificar el siguiente valor por el que consideramos.
 
 ![Ejercicio 2](2.png)
 
