@@ -118,8 +118,44 @@ and privilege_type='SELECT';
 ![Ejercicio 22](7.png)
 
 
-(ORACLE) Crea un tablespace TS2 con tamaño de extensión de 256K. Realiza una consulta que genere un script que asigne ese tablespace como tablespace por defecto a los usuarios que no tienen privilegios para consultar ninguna tabla de SCOTT, excepto a SYSTEM.
+3. (ORACLE) Crea un tablespace TS2 con tamaño de extensión de 256K. Realiza una consulta que genere un script que asigne ese tablespace como tablespace por defecto a los usuarios que no tienen privilegios para consultar ninguna tabla de SCOTT, excepto a SYSTEM.
 
-(ORACLE, Postgres) Realiza un procedimiento que reciba un nombre de usuario y nos muestre cuántas sesiones tiene abiertas en este momento. Además, para cada una de dichas sesiones nos mostrará la hora de comienzo y el nombre de la máquina, sistema operativo y programa desde el que fue abierta.
+4. (ORACLE, Postgres) Realiza un procedimiento que reciba un nombre de usuario y nos muestre cuántas sesiones tiene abiertas en este momento. Además, para cada una de dichas sesiones nos mostrará la hora de comienzo y el nombre de la máquina, sistema operativo y programa desde el que fue abierta.
+
+# ORACLE
+
+```
+CREATE OR REPLACE PROCEDURE MostrarSesiones(p_username VARCHAR2)
+AS
+  v_num_sesiones NUMBER := 0;
+BEGIN
+  FOR session_info IN (SELECT
+                         TO_CHAR(logon_time, 'YYYY-MM-DD HH24:MI:SS') AS hora_inicio,
+                         machine AS nombre_maquina,
+                         osuser AS sistema_operativo,
+                         program
+                       FROM v$session
+                       WHERE username = p_username)
+  LOOP
+    v_num_sesiones := v_num_sesiones + 1;
+
+    DBMS_OUTPUT.PUT_LINE('Número de Sesiones: ' || v_num_sesiones);
+    DBMS_OUTPUT.PUT_LINE('Hora de Inicio: ' || session_info.hora_inicio);
+    DBMS_OUTPUT.PUT_LINE('Nombre de la Máquina: ' || session_info.nombre_maquina);
+    DBMS_OUTPUT.PUT_LINE('Sistema Operativo: ' || session_info.sistema_operativo);
+    DBMS_OUTPUT.PUT_LINE('Programa: ' || session_info.program);
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('------------------------------------');
+  DBMS_OUTPUT.PUT_LINE('Total de Sesiones: ' || v_num_sesiones);
+END;
+/
+
+
+EXEC MostrarSesiones('SCOTT');
+```
+![Ejercicio 44](444.png)
+
+
 
 (ORACLE) Realiza un procedimiento que muestre los usuarios que pueden conceder privilegios de sistema a otros usuarios y cuales son dichos privilegios.
