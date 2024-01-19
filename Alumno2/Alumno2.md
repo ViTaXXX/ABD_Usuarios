@@ -51,7 +51,7 @@ Algunas de las opciones de uso para los roles son:
 
 Ejemplo:
 
-Para crear un rol que de privilegios que permita crear bases de datos o crear neuvos roles:
+Para crear un rol que de privilegios que permita crear bases de datos o crear nuevos roles:
 
 `CREATE ROLE rol WITH CREATEDB, CREATEROLE;`
 
