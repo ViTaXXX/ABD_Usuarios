@@ -161,7 +161,7 @@ En resumen, se usa GRANT para otorgar, REVOKE para quitar los privilegios y WITH
 
 ## 3. Averigua si existe el concepto de rol en Postgres y señala las diferencias con los roles de ORACLE.
 
-Sí, es más, los usuarios como tal realmente son roles. Aunque a la hora de crear un usuario se usa user, realmente se crean como roles, por eso en vez de otorgar roles a un usuario, lo que se hace es otorgar privilegios a un rol usado como usuario. En cambio en Oracle es distinto, ya que un usuario y un rol tienen significados diferentes a diferencia de Postgre. En Oracle, estos pueden ser grupos de usuarios o roles incluso. Los roles son mal dicho usuarios que también son propietarios de las bb en Postgre, y pueden tener otros roles dentro de roles también. 
+Sí, es más, los usuarios como tal realmente son roles. Aunque a la hora de crear un usuario se usa user, realmente se crean como roles, por eso en vez de otorgar roles a un usuario, lo que se hace es otorgar privilegios a un rol usado como usuario. En cambio en Oracle es distinto, ya que un usuario y un rol tienen significados diferentes a diferencia de Postgre. En Oracle, estos pueden ser grupos de usuarios o roles incluso. Los roles son mal dicho usuarios que también son propietarios de las bbdd en Postgre, y pueden tener otros roles dentro de roles también. 
 
 Para crear un rol en Postgre:
 
@@ -240,7 +240,7 @@ Aunque para una consulta mas específica:
 SELECT PRIVILEGE_TYPE, TABLE_NAME, TABLE_SCHEMA, TABLE_CATALOG FROM INFORMATION_SCHEMA.TABLE_PRIVILEGES WHERE GRANTEE='andres1';
 ```
 
-<img src="img/6.png" width="600">
+<img src="img/6.png">
 
 
 
@@ -267,6 +267,4 @@ Para comprobar esto con la tabla vendedores que pertenece al usuario postgres (p
 ## 1. Realiza una función de verificación de contraseñas que compruebe que la contraseña tiene el mismo formato que una dirección IPv4 y que la longitud de la misma es diferente de la longitud de la anterior. Asígnala al perfil CONTRASEÑARARA. Comprueba que funciona correctamente.
 
 ## 2. Realiza un procedimiento llamado MostrarPrivilegiosdelRol que reciba el nombre de un rol y muestre los privilegios de sistema y los privilegios sobre objetos que lo componen, incluyendo los pertenecientes a otros roles concedidos a dicho rol. Debes utilizar la técnica de la recursividad contemplando la posibilidad de que existan infinitos niveles de roles anidados.
-Asígnala al perfil CONTRASEÑARARA. Comprueba que funciona correctamente.
 
-Realiza un procedimiento llamado MostrarPrivilegiosdelRol que reciba el nombre de un rol y muestre los privilegios de sistema y los privilegios sobre objetos que lo componen, incluyendo los pertenecientes a otros roles concedidos a dicho rol. Debes utilizar la técnica de la recursividad contemplando la posibilidad de que existan infinitos niveles de roles anidados.
