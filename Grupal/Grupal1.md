@@ -192,6 +192,27 @@ and privilege_type='SELECT';
 
 3. (ORACLE) Crea un tablespace TS2 con tamaño de extensión de 256K. Realiza una consulta que genere un script que asigne ese tablespace como tablespace por defecto a los usuarios que no tienen privilegios para consultar ninguna tabla de SCOTT, excepto a SYSTEM.
 
+```
+create tablespace TS2 
+  datafile 'tbs_ts2.dbf' 
+  size 256k;
+
+```
+![Ejercicio](130.png)
+
+```
+select 'alter user "'||username||'" default tablespace TS2;'
+  from DBA_USERS
+  where USERNAME!='SYSTEM'
+  and USERNAME not in (select GRANTEE 
+                         from DBA_TAB_PRIVS 
+                         where PRIVILEGE='SELECT' 
+                         and OWNER='SCOTT');
+```
+
+![Ejercicio 44](140.png)
+
+
 4. (ORACLE, Postgres) Realiza un procedimiento que reciba un nombre de usuario y nos muestre cuántas sesiones tiene abiertas en este momento. Además, para cada una de dichas sesiones nos mostrará la hora de comienzo y el nombre de la máquina, sistema operativo y programa desde el que fue abierta.
 
 # ORACLE
