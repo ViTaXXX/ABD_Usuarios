@@ -183,6 +183,9 @@ GRANT rol TO usuario
 
 Para los roles y sus privilegios en Oracle, se consulta el diccionario de datos con las vistas `DBA_ROLES, DBA_ROLE_PRIVS y ROLE_ROLE_PRIVS`. En cuanto a Postgres es con la orden `\du`
 
+<img src="img/1.png" width="600">
+
+
 
 
 ## 4. Averigua si existe el concepto de perfil como conjunto de límites sobre el uso de recursos o sobre la contraseña en Postgres y señala las diferencias con los perfiles de ORACLE. En cualquier caso, intenta averiguar la forma de implementar en Postgres cada uno de los límites que se pueden definir en ORACLE.
@@ -212,6 +215,14 @@ maintenance_work_mem: cantidad de memoria asignada para operaciones de mantenimi
 
 Para este ejercicio he decidido crear un rol llamado `andres2024` donde establezco la caducidad de la contraseña para finales de 2024, y lo he añadido al usuario andres1.
 
+<img src="img/2.png" width="600">
+
+<img src="img/3.png" width="600">
+
+<img src="img/4.png" width="600">
+
+
+
 
 
 ## 6. Realiza consultas al diccionario de datos de Postgres para averiguar todos los privilegios que tiene un usuario concreto.
@@ -229,13 +240,25 @@ Aunque para una consulta mas específica:
 SELECT PRIVILEGE_TYPE, TABLE_NAME, TABLE_SCHEMA, TABLE_CATALOG FROM INFORMATION_SCHEMA.TABLE_PRIVILEGES WHERE GRANTEE='andres1';
 ```
 
+<img src="img/6.png" width="600">
+
+
+
 ## 7. Realiza consultas al diccionario de datos en Postgres para averiguar qué usuarios pueden consultar una tabla concreta.
 
 Para hacer este ejercicio hay que hacer una consulta a INFORMATION_SCHEMA.TABLE_PRIVILEGES. En mi ejemplo tengo una tabla llamada vendedores a la cual le he dado privilegios al usuario andres1. Al hacer la consulta aparece andres1 y postgres que significa que esos son los usuarios que pueden consultar la tabla vendedores.
 
+<img src="img/5.png" width="600">
+
+
 ## 8. Realiza una consulta al diccionario de datos de Postgres para mostrar qué usuarios tienen privilegios sobre algún objeto de otro usuario.
 
-Para comprobar esto con la tabla vendedores que pertenece al usuario postgres (para ver el propietario de una tabla es con `\dt nombretabla`:
+Para comprobar esto con la tabla vendedores que pertenece al usuario postgres (para ver el propietario de una tabla es con `\dt nombretabla`), se ve como andres1 tambien tiene privilegios en ese objeto que no le pertenece, sino a postgres:
+
+<img src="img/7.png" width="600">
+
+<img src="img/8.png" width="600">
+
 
 
 
