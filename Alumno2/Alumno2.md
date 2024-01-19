@@ -4,7 +4,7 @@
 
 ## 1. Averigua que privilegios de sistema hay en Postgres y como se asignan a un usuario.
 
-La verdad que PostgreSQL funciona un poco diferente a Oracle, ya que los  privilegios y permisos se administran utilizando roles. Estos roles son básicamente grupos de usuarios que comparten los mismos privilegios y permisos en la base de datos, algo parecido a los "privilegios de los grupos" como tal, pero haciendo incapié que evidente no es lo mismo, pero sirve un poco para poder comprenderlo de mejor manera.
+La verdad que PostgreSQL funciona un poco diferente a Oracle, ya que los  privilegios y permisos se administran utilizando roles. Estos roles son básicamente "grupos de usuarios" que comparten los mismos privilegios y permisos en la base de datos, algo parecido a los "privilegios de los grupos" como tal, pero haciendo incapié que evidente no es lo mismo, pero sirve un poco para poder comprenderlo de mejor manera. Pero realmente en Posgre no existen el concepto de usuario como tal, sino rol, más abajo explico un poco más del tema.
 
 | Privilegio   | Descripción                                               |
 |--------------|-----------------------------------------------------------|
