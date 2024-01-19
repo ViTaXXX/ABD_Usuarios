@@ -251,4 +251,34 @@ EXEC MostrarSesiones('SCOTT');
 
 
 
-(ORACLE) Realiza un procedimiento que muestre los usuarios que pueden conceder privilegios de sistema a otros usuarios y cuales son dichos privilegios.
+5. (ORACLE) Realiza un procedimiento que muestre los usuarios que pueden conceder privilegios de sistema a otros usuarios y cuales son dichos privilegios.
+
+```
+CREATE OR REPLACE PROCEDURE mostrar_sistemap
+AS
+  CURSOR c_otros IS
+    SELECT USERNAME, PRIVILEGE
+    FROM USER_SYS_PRIVS
+    WHERE PRIVILEGE IN ('CREATE USER', 'ALTER USER', 'DROP USER');
+  
+  v_u VARCHAR2(30);
+  v_p VARCHAR2(30);
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('-----------------------------------------------------------------');
+  DBMS_OUTPUT.PUT_LINE('Otros privilegios de sistema y sus privilegios:');
+  DBMS_OUTPUT.PUT_LINE('-----------------------------------------------------------------');
+  
+  FOR i IN c_otros LOOP
+    v_u := i.USERNAME;
+    v_p := i.PRIVILEGE;
+    DBMS_OUTPUT.PUT_LINE(v_u || ' tiene el privilegio de ' || v_p);
+    DBMS_OUTPUT.PUT_LINE('-----------------------------------------------------------------');
+  END LOOP;
+END mostrar_sistemap;
+/
+
+exec mostrar_sistemap;
+
+```
+
+![Ejercicio](135.png)
