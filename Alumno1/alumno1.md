@@ -300,7 +300,7 @@ WHERE (resource_name = 'SESSIONS_PER_USER' AND limit NOT IN ('UNLIMITED', 'DEFAU
 
 
 
-25. Realiza un procedimiento llamado MostrarTiempoSesión que reciba un nombre de usuario y muestre el tiempo máximo de una sesión y el que ha transcurrido realmente en cada una de las sesiones que tenga abiertas.
+25. Reaaliza un procedimiento llamado MostrarTiempoSesión que reciba un nombre de usuario y muestre el tiempo máximo de una sesión y el que ha transcurrido realmente en cada una de las sesiones que tenga abiertas.
 
 ```
 CREATE OR REPLACE PROCEDURE MostrarTiempoSesion (
