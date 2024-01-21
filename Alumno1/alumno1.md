@@ -301,3 +301,49 @@ WHERE (resource_name = 'SESSIONS_PER_USER' AND limit NOT IN ('UNLIMITED', 'DEFAU
 
 
 25. Realiza un procedimiento llamado MostrarTiempoSesión que reciba un nombre de usuario y muestre el tiempo máximo de una sesión y el que ha transcurrido realmente en cada una de las sesiones que tenga abiertas.
+
+```
+CREATE OR REPLACE PROCEDURE MostrarTiempoSesion (
+    usuario IN VARCHAR2
+) IS
+    v_perfil         VARCHAR2(30);
+    v_maxsesiones    NUMBER;
+    v_tiempo_maximo  NUMBER;
+    v_tiempo_real    NUMBER;
+BEGIN
+    BEGIN
+        SELECT profile INTO v_perfil
+        FROM DBA_USERS
+        WHERE username = usuario
+        SELECT TO_NUMBER(
+                   CASE 
+                       WHEN REGEXP_LIKE(limit, '^\d+$') THEN limit
+                       ELSE NULL
+                   END
+               ) INTO v_maxsesiones
+        FROM DBA_PROFILES
+        WHERE profile = v_perfil
+              AND resource_name = 'SESSIONS_PER_USER';
+
+        SELECT TO_NUMBER(
+                   CASE 
+                       WHEN REGEXP_LIKE(LIMIT, '^\d+$') THEN LIMIT
+                       ELSE NULL
+                   END
+               ) INTO v_tiempo_maximo
+        FROM DBA_PROFILES
+        WHERE PROFILE = v_perfil
+              AND RESOURCE_NAME = 'IDLE_TIME';
+
+        SELECT SUM(LAST_CALL_ET) INTO v_tiempo_real
+        FROM V$SESSION
+
+        WHERE username = usuario;
+        DBMS_OUTPUT.PUT_LINE('El usuario ' || usuario || ' tiene sesiones concurrentes permitidas de: ' || v_perfil);
+        DBMS_OUTPUT.PUT_LINE('Tiempo máximo permitido para la sesión: ' || v_tiempo_maximo || ' segundos');
+        DBMS_OUTPUT.PUT_LINE('Tiempo real transcurrido en todas las sesiones: ' || v_tiempo_real || ' segundos');
+    END;
+END MostrarTiempoSesion;
+/
+```
+![Ejercicio 25](233.png)
