@@ -158,16 +158,44 @@ GRANT ALL PRIVILEGES ON *.* TO 'Empleado'@'localhost' WITH GRANT OPTION;
 
 1. Conectarse a la base de datos.
 
+He creado el usuario empleado con la contraseña empleado:
+
+<img src="g1.png" width="600">
+
+<img src="g2.png" width="600">
+
+Compruebo que puede iniciar sesión:
+
+<img src="g3.png" width="600">
+
 2. Modificar la duración máxima de las sesiones de otros usuarios.
 
 3. Modificar índices en cualquier esquema (este privilegio podrá pasarlo a quien quiera)
 
+<img src="g4.png" width="600">
+
 4. Insertar filas en scott.emp (este privilegio podrá pasarlo a quien quiera)
+
+```sql
+GRANT INSERT ON EMP TO empleado WITH GRANT OPTION
+```
+
+<img src="g5.png" width="600">
+
+Y lo compruebo insertando con el usuario empleado:
+
+<img src="g6.png" width="600">
+
 
 5. Insertar datos en tablas ubicadas en cualquier tablespace.
 
+<img src="g4.png" width="600">
+
+
+
 6. Gestión completa de usuarios, privilegios y roles.
 
+<img src="g7.png" width="600">
 
 
 
@@ -204,6 +232,18 @@ and privilege_type='SELECT';
 ```
 
 ![Ejercicio 22](7.png)
+
+# Postgre
+
+```sql
+
+SELECT 'REVOKE SELECT ON TABLE' || TABLE_SCHEMA|| '.' ||TABLE_NAME|| ' FROM ' || GRANTEE || ';' FROM INFORMATION_SCHEMA.TABLE_PRIVILEGES WHERE TABLE_CATALOG = 'grupal' AND PRIVILEGE_TYPE = 'SELECT';
+```
+
+<img src="g8.png" width="600">
+
+<img src="g9.png" width="600">
+
 
 
 3. (ORACLE) Crea un tablespace TS2 con tamaño de extensión de 256K. Realiza una consulta que genere un script que asigne ese tablespace como tablespace por defecto a los usuarios que no tienen privilegios para consultar ninguna tabla de SCOTT, excepto a SYSTEM.
@@ -264,6 +304,47 @@ END;
 EXEC MostrarSesiones('SCOTT');
 ```
 ![Ejercicio 44](444.png)
+
+# Postgresql
+
+Para esta parte he utilizado pg_stat_activity que viene a ser una vista que proporciona información  de las sesiones
+
+```sql
+CREATE OR REPLACE FUNCTION obtener_info_sesiones(usuario_param VARCHAR) RETURNS TABLE (
+    num_sesion INT,
+    hora_comienzo TIMESTAMPTZ,
+    direccion_ip TEXT,
+    programa TEXT
+) AS $$
+BEGIN
+    FOR num_sesion, hora_comienzo, direccion_ip, programa IN
+        SELECT 
+            pg_stat_activity.pid,
+            pg_stat_activity.backend_start,
+            pg_stat_activity.client_addr,
+            pg_stat_activity.application_name
+        FROM pg_stat_activity
+        WHERE pg_stat_activity.usename = usuario_param
+    LOOP
+        RETURN NEXT;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+```
+Para probarlo:
+
+```sql
+SELECT * FROM obtener_info_sesiones('usuario');
+
+```
+Lo he probado con diferentes usuarios:
+
+<img src="g10.png" width="600">
+
+<img src="g11.png" width="600">
+
+<img src="g12.png" width="600">
 
 
 
