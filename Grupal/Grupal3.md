@@ -8,6 +8,10 @@ a) Usuarios y permisos sobre objetos. Óscar
 
 b) Permisos de sistema. Ándres 
 
+
+[Videos](https://drive.google.com/drive/folders/1t4yEHYT8_VD_1Te7bLSrhIVbaR7a0Tq0?usp=drive_link)
+
+
 ## Oracle:
 
 Oracle permite asignar los privilegios -> Usuarios o a roles
