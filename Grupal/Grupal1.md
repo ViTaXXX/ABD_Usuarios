@@ -154,6 +154,22 @@ GRANT ALL PRIVILEGES ON *.* TO 'Empleado'@'localhost' WITH GRANT OPTION;
 
 6.6 Insertar datos en tablas ubicadas en cualquier tablespace.
 
+# Postgre
+
+1. Conectarse a la base de datos.
+
+2. Modificar la duración máxima de las sesiones de otros usuarios.
+
+3. Modificar índices en cualquier esquema (este privilegio podrá pasarlo a quien quiera)
+
+4. Insertar filas en scott.emp (este privilegio podrá pasarlo a quien quiera)
+
+5. Insertar datos en tablas ubicadas en cualquier tablespace.
+
+6. Gestión completa de usuarios, privilegios y roles.
+
+
+
 
 2. (ORACLE, Postgres, MySQL) Escribe una consulta que obtenga un script para quitar cualquier privilegio de consulta a alguna tabla de SCOTT a los usuarios que lo tengan.
 
