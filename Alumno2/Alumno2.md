@@ -266,5 +266,162 @@ Para comprobar esto con la tabla vendedores que pertenece al usuario postgres (p
 
 ## 1. Realiza una función de verificación de contraseñas que compruebe que la contraseña tiene el mismo formato que una dirección IPv4 y que la longitud de la misma es diferente de la longitud de la anterior. Asígnala al perfil CONTRASEÑARARA. Comprueba que funciona correctamente.
 
+```sql
+ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+
+SET SERVEROUTPUT ON;
+```
+
+```sql
+CREATE OR REPLACE PROCEDURE P_VERIFICA_LONGITUD_DIFERENTE(P_NEW_PASSWD VARCHAR2, P_OLD_PASSWD VARCHAR2)
+IS
+BEGIN
+    IF LENGTH(P_NEW_PASSWD) = LENGTH(P_OLD_PASSWD) THEN
+        RAISE_APPLICATION_ERROR(-20100, 'Debe introducir una contraseña con mas longitud que la anterior. ');
+    END IF;
+END;
+/
+```
+
+<img src="img/ora1.png">
+
+
+
+```sql
+
+CREATE OR REPLACE PROCEDURE P_VERIFICA_FORMATO_IPV4(P_NEW_PASSWD VARCHAR2)
+IS
+BEGIN
+    IF NOT REGEXP_LIKE(P_NEW_PASSWD, '^(\d{1,3}\.){3}\d{1,3}$') THEN
+        RAISE_APPLICATION_ERROR(-20102, 'La nueva contraseña debe tener un formato similar a una dirección IPv4.');
+    END IF;
+END;
+/
+
+```
+
+<img src="img/ora2.png">
+
+
+
+
+```sql
+CREATE OR REPLACE PROCEDURE P_COMPARA_CARACTERES(P_CHAR VARCHAR2, P_OLD_PASSWD VARCHAR2, P_SAME_CHAR OUT NUMBER)
+IS
+BEGIN
+    FOR V_INDEX IN 1..LENGTH(P_OLD_PASSWD) LOOP
+        IF SUBSTR(P_OLD_PASSWD, V_INDEX, 1) = P_CHAR THEN
+            P_SAME_CHAR := 1;
+        END IF;        
+    END LOOP;
+END;
+/
+
+```
+<img src="img/ora3.png">
+
+
+
+```sql
+CREATE OR REPLACE PROCEDURE P_CUENTA_NUM_Y_LETRAS(P_CHAR VARCHAR2, P_NUM OUT NUMBER, P_LETTER OUT NUMBER)
+IS
+BEGIN
+    IF P_CHAR = REGEXP_REPLACE(P_CHAR, '[0-9]') THEN
+        P_NUM := P_NUM + 1;
+    ELSE 
+        P_LETTER := P_LETTER + 1;
+    END IF;
+END;
+/
+```
+
+<img src="img/ora4.png">
+
+
+
+```sql
+CREATE OR REPLACE FUNCTION F_VALIDA_ERRORES(P_REPEATED_COUNT NUMBER, P_NUM_COUNT NUMBER, P_LETTER_COUNT NUMBER)
+RETURN NUMBER
+IS
+BEGIN
+    CASE
+    WHEN P_REPEATED_COUNT < 6 THEN
+        RAISE_APPLICATION_ERROR(-20101, 'El formato de la nueva contraseña no puede tener la misma longitud.');
+    ELSE
+        RETURN 1;
+    END CASE;
+END;
+/
+```
+<img src="img/ora5.png">
+
+
+
+```sql
+CREATE OR REPLACE FUNCTION F_VERIFICA_CONTRASENA (P_USER VARCHAR2, P_NEW_PASSWD VARCHAR2, P_OLD_PASSWD VARCHAR2)
+RETURN BOOLEAN
+IS
+    V_NUM_COUNT NUMBER := 0;
+    V_LETTER_COUNT NUMBER := 0;
+BEGIN
+    P_VERIFICA_LONGITUD_DIFERENTE(P_NEW_PASSWD, P_OLD_PASSWD);
+
+    P_VERIFICA_FORMATO_IPV4(P_NEW_PASSWD);
+
+    FOR V_INDEX IN 1..LENGTH(P_NEW_PASSWD) LOOP
+        P_CUENTA_NUM_Y_LETRAS(SUBSTR(P_NEW_PASSWD, V_INDEX, 1), V_NUM_COUNT, V_LETTER_COUNT);
+    END LOOP;
+
+    RETURN TRUE;
+END;
+/
+```
+<img src="img/ora6.png">
+
+Creo el perfil:
+
+<img src="img/oraok8.png">
+
+
+Luego he creado el usuario ANDRES5  y le he asignado el perfil contrasenarara:
+
+<img src="img/oraok5.png">
+
+Si intento darle una contraseña que no sea una ipv4:
+
+<img src="img/oraok6.png">
+
+<img src="img/oraok.png">
+
+
+Y para terminar le doy una contraseña de una ip:
+
+<img src="img/oraok7.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 2. Realiza un procedimiento llamado MostrarPrivilegiosdelRol que reciba el nombre de un rol y muestre los privilegios de sistema y los privilegios sobre objetos que lo componen, incluyendo los pertenecientes a otros roles concedidos a dicho rol. Debes utilizar la técnica de la recursividad contemplando la posibilidad de que existan infinitos niveles de roles anidados.
 
