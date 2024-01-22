@@ -6,6 +6,8 @@ Todas las operaciones realizadas deben acreditarse con una prueba de funcionamie
 
 [Alumno 2: Andres](Alumno2/Alumno2.md)
 
+[Alumno 4: Jose Manuel](Alumno4/Alumno4.md)
+
 
 [Grupal 1](Grupal/Grupal1.md)
 
