@@ -116,13 +116,13 @@ Para colsultar los roles usamos la siguiente instruccion:
 db.getUser("usuario1")
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/61185465-41d8-48ee-82b8-66b31bf699da/659dca70-fb73-4421-ad80-151cd02f9add/Untitled.png)
+![GetUser](GetUser.png)
 
 Para ver los privilegios que tiene un rol usamos el siguiente comando:
 ```
 db.getRole("rol1")
 ```
-![getRole](https://www.notion.so/Individual-Usuarios-3e43b70059b44668a9000c71ad190013?pvs=4#a969a45ce7e2424e94733d3c9e02a62f)
+![getRole](GetRole.png)
 
 ### Averigua si es posible limitar el acceso a un documento concreto de una colección.
 La unica forma que he encontrado de limitar el acceso a un documento en concreto es crear una vista en la que no aparezcan los documentos que queremos restringir y mediante los roles dar acceso a la vista en vez de a la coleccion entera.
@@ -143,7 +143,7 @@ db.coches.insertMany([
 
 Ahora mostramos todos los datos de la coleccion:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/61185465-41d8-48ee-82b8-66b31bf699da/26187f73-4fb7-409a-8a6d-b61b821af7ff/Untitled.png)
+![Coches](cochesFind.png)
 
 Ahora crearemos una vista para restringir y no mostraremos la marca Honda:
 
@@ -175,6 +175,8 @@ db.createRole({
 ```
 
 Consultamos la vista:
+
+![Restringido](restringido.png)
 
 ### Averigua si se puede conseguir que un usuario solo tenga permiso para ver ciertos atributos de los documentos.
 
